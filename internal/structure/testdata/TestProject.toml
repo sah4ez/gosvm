@@ -1,6 +1,6 @@
+BasePath = "github.com/sah4ez/gosvm/cmd/testdata/test_project"
 Title = "test_project"
 Description = "Project with sub-project"
-BasePaht = "github.com/sah4ez/gosvm/cmd/testdata/test_project"
 Version = "1.0.0"
 
 [[SubProject]]
