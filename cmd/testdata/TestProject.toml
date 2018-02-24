@@ -1,0 +1,14 @@
+Title = "test_project"
+Description = "Project with sub-project"
+BasePaht = "github.com/sah4ez/gosvm/cmd/testdata/test_project"
+Version = "1.0.0"
+
+[[SubProject]]
+Title = "sub_project1"
+Description = "Single service from currect project with dep vendoring"
+Path = "/sub_project1"
+
+[[SubProject]]
+Title = "sub_project2"
+Description = "Single service from currect project with glide vendoring"
+Path = "/sub_project2"
