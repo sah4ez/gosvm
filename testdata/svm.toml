@@ -1,0 +1,14 @@
+Title = "TestData"
+Description = "Some text ...."
+Version = "1.0.0"
+BasePath = "github.com/sah4ez/gosvm/testdata"
+
+[[SubProject]]
+Title = "Sub1"
+Desription = "Some text ..."
+Version = "1.0.1"
+
+[[SubProject]]
+Title = "Sub2"
+Desription = "Some text ..."
+Version = "2.0.1"

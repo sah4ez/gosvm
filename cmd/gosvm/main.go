@@ -63,7 +63,7 @@ func main() {
 			cmdArgs := []string{}
 			err := cmd.Run(cmdArgs)
 			if err != nil {
-				fmt.Println(os.Stderr, "Could not execute %s. Error: %s", cmdName, err)
+				fmt.Fprintln(os.Stderr, "Could not execute %s. Error: %s", cmdName, err)
 				os.Exit(1)
 			}
 		}
