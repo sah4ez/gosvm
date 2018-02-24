@@ -19,3 +19,7 @@
 #  name = "github.com/x/y"
 #  version = "2.4.0"
 
+[[constraint]]
+ name = "github.com/BurntSushi/toml"
+ version = "v0.3.0"
+ source = "https://github.com/BurntSushi/toml"
