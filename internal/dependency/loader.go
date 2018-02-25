@@ -3,7 +3,7 @@ package dependency
 // Loader provide methods for each dependecies manager (dep, glide and etc.)
 type Loader interface {
 	// Load loading slice Packages from config file or return error
-	Load() ([]Package, error)
+	Load() (*Packages, error)
 	// SetVersion change for pack Package on new or return error
 	SetVersion(pack, version string) error
 	// Version return version for pack Package or return error
@@ -15,10 +15,28 @@ type Loader interface {
 	Update() error
 }
 
+type Packages struct {
+	packages map[string]map[string][]string
+}
+
 // Package provide internal data structure
 type Package struct {
 	// Name package
 	Name string
 	// Version package
-	Version string
+	LibVersion string
+}
+
+func NewPackages() *Packages {
+	return &Packages{make(map[string]map[string][]string)}
+}
+
+func (p *Packages) Add(lib string, pack Package) {
+	if _, ok := p.packages[lib]; !ok {
+		p.packages[lib] = make(map[string][]string)
+	}
+	if _, ok := p.packages[lib][pack.LibVersion]; !ok {
+		p.packages[lib][pack.LibVersion] = []string{}
+	}
+	p.packages[lib][pack.LibVersion] = append(p.packages[lib][pack.LibVersion], pack.Name)
 }

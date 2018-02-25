@@ -1,0 +1,12 @@
+BasePath = "github.com/sah4ez/gosvm/internal/dependency/glide/testdata/test_project"
+Title = "test_project"
+Description = "Project with sub-project"
+Version = "1.0.0"
+
+[[SubProject]]
+Title = "sub_project1"
+Description = "Single service from currect project with dep vendoring"
+
+[[SubProject]]
+Title = "sub_project2"
+Description = "Single service from currect project with glide vendoring"
