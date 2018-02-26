@@ -18,6 +18,7 @@ type command interface {
 func main() {
 	commands := [...]command{
 		&listCmd{},
+		&libsCmd{},
 	}
 
 	examples := [...][2]string{

@@ -1,5 +1,7 @@
 package dependency
 
+import "sort"
+
 // Loader provide methods for each dependecies manager (dep, glide and etc.)
 type Loader interface {
 	// Load loading slice Packages from config file or return error
@@ -39,4 +41,15 @@ func (p *Packages) Add(lib string, pack Package) {
 		p.packages[lib][pack.LibVersion] = []string{}
 	}
 	p.packages[lib][pack.LibVersion] = append(p.packages[lib][pack.LibVersion], pack.Name)
+}
+
+func (p *Packages) Range(apply func(string, map[string][]string)) {
+	keys := make([]string, 0, len(p.packages))
+	for key := range p.packages {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	for _, key := range keys {
+		apply(key, p.packages[key])
+	}
 }
