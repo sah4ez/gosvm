@@ -29,14 +29,18 @@ func (l *listCmd) Run(args []string) error {
 
 		fmt.Fprintln(os.Stdout, "Title:\t\t", root.Title)
 		fmt.Fprintln(os.Stdout, "Description:\t", root.Description)
-		fmt.Fprintln(os.Stdout, "Version:\t", root.Description)
+		fmt.Fprintln(os.Stdout, "Version:\t", root.Version)
 		for i, sub := range root.SubProject {
 			if i == 0 {
 				fmt.Fprintln(os.Stdout, "\t")
 				fmt.Fprintln(os.Stdout, "\tSubPackages:")
 				fmt.Fprintln(os.Stdout, "\t")
 			}
-			fmt.Fprintf(os.Stdout, "\t%s@%s\n", sub.Title, sub.Version)
+			fmt.Fprint(os.Stdout, "\t", sub.Title)
+			if sub.Version != "" {
+				fmt.Fprint(os.Stdout, "@", sub.Version)
+			}
+			fmt.Fprint(os.Stdout, "\n")
 		}
 
 	default:
