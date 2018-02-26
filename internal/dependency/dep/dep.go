@@ -15,7 +15,8 @@ func (d *depLoader) Load() (*dependency.Packages, error) {
 	subs := d.root.SubProject
 	for _, sub := range subs {
 		path, ok := fs.PathToDep(d.root.BasePath, sub.Title)
-		if sub.Type == dependency.TomlType {
+		if sub.Type != dependency.TomlType && !ok {
+			//fmt.Fprintln(os.Stderr, "missing type Package and could not load file", path)
 			continue
 		}
 		dep, err := LoadDepFile(path)

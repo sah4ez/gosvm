@@ -1,9 +1,6 @@
 package glide
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/sah4ez/gosvm/fs"
 	"github.com/sah4ez/gosvm/internal/dependency"
 	"github.com/sah4ez/gosvm/internal/structure"
@@ -18,8 +15,8 @@ func (g *glideLoader) Load() (*dependency.Packages, error) {
 	subs := g.root.SubProject
 	for _, sub := range subs {
 		path, ok := fs.PathToGlide(g.root.BasePath, sub.Title)
-		if sub.Type != dependency.GlideType || !ok {
-			fmt.Fprintf(os.Stderr, "couldn't found %s\n", path)
+		if sub.Type != dependency.GlideType && !ok {
+			//			fmt.Fprintln(os.Stderr, "missing type Package and could not load file", path)
 			continue
 		}
 		glide, err := LoadGlideFile(path)
