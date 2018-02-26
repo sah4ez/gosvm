@@ -1,11 +1,36 @@
 package dep
 
-import "github.com/sah4ez/gosvm/internal/dependency"
+import (
+	"github.com/sah4ez/gosvm/fs"
+	"github.com/sah4ez/gosvm/internal/dependency"
+	"github.com/sah4ez/gosvm/internal/structure"
+)
 
-type depLoader struct{}
+type depLoader struct {
+	root *structure.Root
+	deps *dependency.Packages
+}
 
 func (d *depLoader) Load() (*dependency.Packages, error) {
-	panic("not implemented")
+	subs := d.root.SubProject
+	for _, sub := range subs {
+		path, ok := fs.PathToDep(d.root.BasePath, sub.Title)
+		if sub.Type == dependency.TomlType {
+			continue
+		}
+		dep, err := LoadDepFile(path)
+		if err != nil {
+			return d.deps, err
+		}
+		for _, dc := range dep.Constraints {
+			pack := dependency.Package{
+				Name:       sub.Title,
+				LibVersion: dc.Version,
+			}
+			d.deps.Add(dc.Name, pack)
+		}
+	}
+	return d.deps, nil
 }
 
 func (d *depLoader) SetVersion(pack string, version string) error {
@@ -24,6 +49,9 @@ func (d *depLoader) Update() error {
 	panic("not implemented")
 }
 
-func New() dependency.Loader {
-	return &depLoader{}
+func NewDepLoader(root *structure.Root, deps *dependency.Packages) dependency.Loader {
+	return &depLoader{
+		root: root,
+		deps: deps,
+	}
 }

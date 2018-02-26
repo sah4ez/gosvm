@@ -2,6 +2,11 @@ package dependency
 
 import "sort"
 
+var (
+	GlideType = "glide"
+	TomlType  = "toml"
+)
+
 // Loader provide methods for each dependecies manager (dep, glide and etc.)
 type Loader interface {
 	// Load loading slice Packages from config file or return error
