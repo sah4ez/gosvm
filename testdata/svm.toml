@@ -1,14 +1,34 @@
-Title = "TestData"
-Description = "Some text ...."
+Title = "exmaple-project"
+Description = "Example project with library and services"
 Version = "1.0.0"
 BasePath = "github.com/sah4ez/gosvm/testdata"
 
 [[SubProject]]
-Title = "Sub1"
-Desription = "Some text ..."
-Version = "1.0.1"
+Title = "events"
+Description = "package implement event for send between sevices or server-client"
+Version = "1.1.0"
 
 [[SubProject]]
-Title = "Sub2"
-Desription = "Some text ..."
-Version = "2.0.1"
+Title = "logger-wrap"
+Description = "wrapper for logger implement own format/logic"
+Version = "0.2.1"
+
+[[SubProject]]
+Title = "mongo"
+Description = "wrapper for MongoDB driver"
+Version = "0.2.1"
+
+[[SubProject]]
+Title = "models"
+Description = "structure of models for persist document to MongoDB"
+Version = "0.2.1"
+
+[[SubProject]]
+Title = "processor"
+Description = "simple service which process input events and store to MongoDB"
+Version = "0.2.1"
+
+[[SubProject]]
+Title = "scheduler"
+Description = "execute deferred events"
+Version = "0.2.1"

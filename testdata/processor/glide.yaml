@@ -1,0 +1,9 @@
+import:
+- package: github.com/sah4ez/events
+  version: ^1.2.0
+- package: github.com/sah4ez/logger-wrap
+  version: ^3.2.0
+- package: github.com/sah4ez/mongo
+  version: ^2.2.0
+- package: github.com/sah4ez/models
+  version: ^1.0.0

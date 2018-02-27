@@ -1,0 +1,3 @@
+import:
+- package: github.com/sah4ez/logger-wrap
+  version: ^1.0.0
