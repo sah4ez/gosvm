@@ -4,11 +4,11 @@ Golang services version manager
 
 # Background
 
-Why development many services, each can used common package, example: logger, DB driver, model structure and etc.
+For development many services, each can used common packages, example: logger, DB driver, data model and etc.
 
-Each sercices using own repository and vendoring (dep, glide or go.mod)
+Each service using own repository and vendoring (dep, glide or go.mod)
 
-gosvm provide tool for management version through serveral repositoreis
+gosvm provide tool for version management for several repositoreis
 
 Example:
 ``` bash
@@ -22,16 +22,16 @@ drwxr-xr-x   2 sah4ez  sah4ez    64B 27 feb 21:45 mongo
 drwxr-xr-x   2 sah4ez  sah4ez    64B 27 feb 21:45 processor
 drwxr-xr-x   2 sah4ez  sah4ez    64B 27 feb 21:45 scheduler
 ```
-We have the structure projects:
+We have the project structure:
 
-- events - package implement event for send between sevices or server-client
+- events - event implement package for send between sevices or server-client
 - logger-warp - wrapper for logger implement own format/logic
 - mongo - wrapper for MongoDB driver
-- models - structure of models for persist document to MongoDB
-- processor - simple service which process input events and store to MongoDB
-- schdeudler - execute deferred events
+- models -  data model for persist document to MongoDB
+- processor - simple service which process input events and persist to MongoDB
+- schdeudler - to execute deferred events
 
-And we can simple describe all structre in `svm.tolm` and management version and update for all services. Examlpe:
+And we can simple describe all structure in `svm.tolm` and version manage or update it for all services. Examlpe:
 
 ```toml
 Title = "exmaple-project"
@@ -75,12 +75,12 @@ Version = "0.2.1"
 | name | description |
 |-----:|-------------|
 | list | formatted output svm.toml |
-| libs | analyse of usage packages in all packages and formatted output |
-| set | (plan) set version for all or specifict pacakages |
-| get | (plan) get version specific package or all versions usage package for specifict pacakages |
+| libs | analyse of packages usage in all packages and formatted output |
+| set | (plan) set version for all or specifict packages |
+| get | (plan) get specific package version or all  version package usage for specifict package |
 | update | (plan) update vendor and .lock and commit changes |
 | revert | (plan) revert commit from gosvm |
-| ... | you can contribute your ideas here... |
+| ... | you can contribute your ideas here or issues... |
 
 
 Example commands:
