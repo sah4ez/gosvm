@@ -73,15 +73,15 @@ Version = "0.2.1"
 # Commands
 
 | name | description |
-----------------------
+|-----:|-------------|
 | list | formatted output svm.toml |
---------------------------------
 | libs | analyse of usage packages in all packages and formatted output |
 
 Example commands:
 ```bash
 $ ls
 svm.toml
+
 $ gosvm list
 Title:		 exmaple-project
 Description:	 Example project with library and services
@@ -95,7 +95,7 @@ Version:	 1.0.0
 	models@0.2.1
 	processor@0.2.1
 	schdeudler@0.2.1
-$ gosvm libs
+
 $ gosvm libs
 Title:		 exmaple-project
 Description:	 Example project with library and services
