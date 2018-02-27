@@ -76,6 +76,12 @@ Version = "0.2.1"
 |-----:|-------------|
 | list | formatted output svm.toml |
 | libs | analyse of usage packages in all packages and formatted output |
+| set | (plan) set version for all or specifict pacakages |
+| get | (plan) get version specific package or all versions usage package for specifict pacakages |
+| update | (plan) update vendor and .lock and commit changes |
+| revert | (plan) revert commit from gosvm |
+| ... | you can contribute your ideas here... |
+
 
 Example commands:
 ```bash
