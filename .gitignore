@@ -1,4 +1,3 @@
-gosvm
-
 .*.swp
 *.swp
+/bin/*
