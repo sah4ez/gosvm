@@ -19,12 +19,17 @@ func main() {
 	commands := [...]command{
 		&listCmd{},
 		&libsCmd{},
+		&setCmd{},
 	}
 
 	examples := [...][2]string{
 		{
 			"gosvm list",
 			"show list all services for current project",
+		},
+		{
+			"gosvm set bbb.com/path/to/lib 1.2.3 pack.name",
+			"set version of lib in specifict packages",
 		},
 	}
 
@@ -61,10 +66,10 @@ func main() {
 
 	for _, cmd := range commands {
 		if cmd.Name() == cmdName {
-			cmdArgs := []string{}
+			cmdArgs := os.Args[1:]
 			err := cmd.Run(cmdArgs)
 			if err != nil {
-				fmt.Fprintln(os.Stderr, "Could not execute %s. Error: %s", cmdName, err)
+				fmt.Fprintf(os.Stderr, "Could not execute %s. Error: %s\n", cmdName, err)
 				os.Exit(1)
 			}
 		}
