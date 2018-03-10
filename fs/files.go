@@ -18,3 +18,8 @@ func PathToDep(basePath, projectName string) (string, bool) {
 	path := gopath + "/src/" + basePath + "/" + projectName + "/Gopkg.toml"
 	return path, Exists(path)
 }
+
+func PathToGoMod(basePath, projectName string) (string, bool) {
+	path := gopath + "/src/" + basePath + "/" + projectName + "/go.mod"
+	return path, Exists(path)
+}

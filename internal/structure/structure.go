@@ -2,6 +2,8 @@ package structure
 
 import (
 	"io/ioutil"
+	"os"
+	"strings"
 
 	toml "github.com/pelletier/go-toml"
 )
@@ -33,4 +35,22 @@ func LoadStructure(path string) (*Root, error) {
 		return nil, err
 	}
 	return &root, nil
+}
+
+const (
+	Glide = "glide.yaml"
+	Dep   = "Gopkg.toml"
+	GoMod = "go.mod"
+)
+
+func (r *Root) ParseType() {
+	files := []string{Glide, Dep, GoMod}
+	for i := range r.SubProject {
+		for _, file := range files {
+			path := strings.Join([]string{os.Getenv("GOPATH"), "src", r.BasePath, r.SubProject[i].Title, file}, "/")
+			if _, err := os.Stat(path); err == nil {
+				r.SubProject[i].Type = file
+			}
+		}
+	}
 }

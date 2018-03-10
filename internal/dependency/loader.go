@@ -13,6 +13,8 @@ type Loader interface {
 	Load() (*Packages, error)
 	// SetVersion change for pack Package on new or return error
 	SetVersion(pack, version string) error
+	// SetVersionAll change for all packages version lib to new or return error
+	SetVersionAll(pack, version string) error
 	// Version return version for pack Package or return error
 	Version(pack string) (string, error)
 	// CompareVersion comparation source and targer Package  version and

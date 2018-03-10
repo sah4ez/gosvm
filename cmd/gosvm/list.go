@@ -21,7 +21,7 @@ func (l *listCmd) Run(args []string) error {
 	}
 
 	switch len(args) {
-	case 0:
+	case 1:
 		root, err := structure.LoadStructure(wd + "/svm.toml")
 		if err != nil {
 			return err
@@ -44,6 +44,7 @@ func (l *listCmd) Run(args []string) error {
 		}
 
 	default:
+		fmt.Fprintf(os.Stdout, "for args %s\n", args)
 		fmt.Fprintln(os.Stdout, "stub for list.")
 		fmt.Fprintln(os.Stdout, "Project Name: <NAME>")
 		fmt.Fprintln(os.Stdout, "\t Sub: <NAME>@<VERSION>")

@@ -1,0 +1,19 @@
+BasePath = "github.com/sah4ez/gosvm/internal/structure/testdata/parse_type"
+Title = "parser_test"
+Description = "Project with different type dependencies"
+Version = "1.0.0"
+
+[[SubProject]]
+Title = "glide"
+Description = "dep on glide.yaml"
+Path = "/glide"
+
+[[SubProject]]
+Title = "dep"
+Description = "dep on Gopkg.toml"
+Path = "/dep"
+
+[[SubProject]]
+Title = "go_mod"
+Description = "dep on go.mod"
+Path = "/go_mod"

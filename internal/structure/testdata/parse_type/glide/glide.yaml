@@ -1,0 +1,4 @@
+package: github.com/sah4ez/gosvm/internal/structure/testdata/parset_type
+import:
+- package: some.com/to/lib
+  version: 3

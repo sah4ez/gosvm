@@ -1,6 +1,12 @@
 package glide
 
 import (
+	"bufio"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
+
 	"github.com/sah4ez/gosvm/fs"
 	"github.com/sah4ez/gosvm/internal/dependency"
 	"github.com/sah4ez/gosvm/internal/structure"
@@ -36,6 +42,57 @@ func (g *glideLoader) Load() (*dependency.Packages, error) {
 
 func (g *glideLoader) SetVersion(pack string, version string) error {
 	panic("not implemented")
+}
+
+func (g *glideLoader) SetVersionAll(pack string, version string) error {
+	for _, sub := range g.root.SubProject {
+		if sub.Type != structure.Glide {
+			continue
+		}
+
+		path, ok := fs.PathToGlide(g.root.BasePath, sub.Title)
+		if !ok {
+			return fmt.Errorf("could not find path to glide.yaml", sub.Title)
+		}
+
+		file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0)
+		if err != nil {
+			return err
+		}
+
+		reader := bufio.NewReader(file)
+
+		result := []string{}
+		var line string
+		var found bool
+		var pos int
+		for {
+			line, err = reader.ReadString('\n')
+			if strings.Contains(line, pack) {
+				found = true
+			}
+			if found && strings.Contains(line, "version") {
+				found = false
+				v := strings.Split(line, ":")
+				line = strings.Join([]string{v[0], version}, ": ")
+			}
+			pos += len(line)
+			result = append(result, line)
+
+			if err != nil {
+				break
+			}
+		}
+		result = append(result, "")
+		err = ioutil.WriteFile(path, []byte(strings.Join(result, "")), 0644)
+		if err != nil {
+			return err
+		}
+
+		fmt.Println("loaded: \n", strings.Join(result, ""))
+		file.Close()
+	}
+	return nil
 }
 
 func (g *glideLoader) Version(pack string) (string, error) {

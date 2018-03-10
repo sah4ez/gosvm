@@ -38,6 +38,10 @@ func (d *depLoader) SetVersion(pack string, version string) error {
 	panic("not implemented")
 }
 
+func (d *depLoader) SetVersionAll(pack string, version string) error {
+	panic("not implemented")
+}
+
 func (d *depLoader) Version(pack string) (string, error) {
 	panic("not implemented")
 }
