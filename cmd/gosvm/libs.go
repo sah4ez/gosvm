@@ -29,7 +29,7 @@ func (l *libsCmd) Run(args []string) error {
 	stdout := bytes.NewBuffer([]byte{})
 
 	switch len(args) {
-	case 0:
+	case 1:
 		root, err := structure.LoadStructure(wd + "/svm.toml")
 		if err != nil {
 			return err
@@ -73,7 +73,7 @@ func (l *libsCmd) Run(args []string) error {
 			fmt.Fprintln(stdout)
 		})
 	default:
-		fmt.Fprintln(os.Stderr, "wrong args")
+		fmt.Fprintln(os.Stderr, "wrong args", args)
 	}
 	defer func(out bytes.Buffer) {
 		fmt.Fprintln(os.Stdout, out.String())

@@ -75,6 +75,7 @@ func (g *glideLoader) SetVersionAll(pack string, version string) error {
 				found = false
 				v := strings.Split(line, ":")
 				line = strings.Join([]string{v[0], version}, ": ")
+				line += "\n"
 			}
 			pos += len(line)
 			result = append(result, line)
