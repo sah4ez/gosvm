@@ -2,9 +2,9 @@ SHELL:=/bin/bash
 
 .PHONY: build
 build:
-	go fmt ./...
-	go build ./cmd/gosvm 
+	vgo fmt ./...
+	vgo build ./cmd/gosvm 
 	@mv gosvm ./bin/gosvm
 
-dev-build: build
+install: build
 	@cp ./bin/gosvm $(GOPATH)/bin/gosvm

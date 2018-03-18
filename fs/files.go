@@ -1,4 +1,4 @@
-package fs
+package fs // import "github.com/sah4ez/gosvm/fs"
 
 import "os"
 

@@ -1,4 +1,4 @@
-package main
+package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
 	"fmt"

@@ -1,4 +1,4 @@
-package dep
+package dep // import "github.com/sah4ez/gosvm/pkg/dependency/dep"
 
 import (
 	"github.com/sah4ez/gosvm/fs"
