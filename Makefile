@@ -4,8 +4,7 @@ BUILD_DATE=`date +%FT%T%z`
 VERSION=0.0.1
 LDFLAGS=-ldflags "-X main.Version=$(VERSION) -X main.Hash=$(GIT_REV) -X main.BuildDate=$(BUILD_DATE)"
 
-.PHONY: build
-build:
+build: test
 	vgo fmt ./...
 	vgo build $(LDFLAGS) ./cmd/gosvm 
 	@mv gosvm ./bin/gosvm
