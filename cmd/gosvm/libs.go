@@ -53,7 +53,7 @@ func (l *libsCmd) Run(args []string) error {
 		fmt.Fprintln(stdout, "Title:\t\t", root.Title)
 		fmt.Fprintln(stdout, "Description:\t", root.Description)
 		fmt.Fprintln(stdout, "Version:\t", root.Version)
-		fmt.Fprintln(stdout, "\n====================Libs====================\n")
+		fmt.Fprintln(stdout, "====================Libs====================")
 
 		packs.Range(func(libName string, packVersion map[string][]string) {
 			fmt.Fprintln(stdout, "\t", libName)

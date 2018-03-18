@@ -1,6 +1,7 @@
 package structure
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -48,6 +49,7 @@ func (r *Root) ParseType() {
 	for i := range r.SubProject {
 		for _, file := range files {
 			path := strings.Join([]string{os.Getenv("GOPATH"), "src", r.BasePath, r.SubProject[i].Title, file}, "/")
+			fmt.Println(path)
 			if _, err := os.Stat(path); err == nil {
 				r.SubProject[i].Type = file
 			}

@@ -1,6 +1,7 @@
 package glide
 
 import (
+	"os"
 	"testing"
 
 	"github.com/sah4ez/gosvm/pkg/dependency"
@@ -17,6 +18,7 @@ func TestLoadGlide(t *testing.T) {
 	//	"import/second/package":{
 	//		"2.0.0":{"sub_project1", "sub_project2"},
 	//	}, //} exp := {""} pwd, err := os.Getwd()
+	pwd, err := os.Getwd()
 	if err != nil {
 		t.Error("Could not get pwd")
 	}

@@ -12,3 +12,7 @@ build:
 
 install: build
 	@cp ./bin/gosvm $(GOPATH)/bin/gosvm
+
+.PHONY: test
+test:
+	vgo test ./...

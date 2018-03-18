@@ -52,7 +52,7 @@ func (g *glideLoader) SetVersionAll(pack string, version string) error {
 
 		path, ok := fs.PathToGlide(g.root.BasePath, sub.Title)
 		if !ok {
-			return fmt.Errorf("could not find path to glide.yaml", sub.Title)
+			return fmt.Errorf("could not find path to glide.yaml: %s", sub.Title)
 		}
 
 		file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0)

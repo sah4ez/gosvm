@@ -1,4 +1,4 @@
-BasePath = "github.com/sah4ez/gosvm/internal/structure/testdata/parse_type"
+BasePath = "github.com/sah4ez/gosvm/pkg/structure/testdata/parse_type"
 Title = "parser_test"
 Description = "Project with different type dependencies"
 Version = "1.0.0"
