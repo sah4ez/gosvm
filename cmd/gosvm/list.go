@@ -1,13 +1,16 @@
-package main
+package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
 	"fmt"
+	"io"
 	"os"
 
-	structure "github.com/sah4ez/gosvm/internal/structure"
+	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
-type listCmd struct{}
+type listCmd struct {
+	w io.Writer
+}
 
 var shortHelpList = "print list all services from project"
 
@@ -27,28 +30,28 @@ func (l *listCmd) Run(args []string) error {
 			return err
 		}
 
-		fmt.Fprintln(os.Stdout, "Title:\t\t", root.Title)
-		fmt.Fprintln(os.Stdout, "Description:\t", root.Description)
-		fmt.Fprintln(os.Stdout, "Version:\t", root.Version)
+		fmt.Fprintln(l.w, "Title:\t\t", root.Title)
+		fmt.Fprintln(l.w, "Description:\t", root.Description)
+		fmt.Fprintln(l.w, "Version:\t", root.Version)
 		for i, sub := range root.SubProject {
 			if i == 0 {
-				fmt.Fprintln(os.Stdout, "\t")
-				fmt.Fprintln(os.Stdout, "\tSubPackages:")
-				fmt.Fprintln(os.Stdout, "\t")
+				fmt.Fprintln(l.w, "\t")
+				fmt.Fprintln(l.w, "\tSubPackages:")
+				fmt.Fprintln(l.w, "\t")
 			}
-			fmt.Fprint(os.Stdout, "\t", sub.Title)
+			fmt.Fprint(l.w, "\t", sub.Title)
 			if sub.Version != "" {
-				fmt.Fprint(os.Stdout, "@", sub.Version)
+				fmt.Fprint(l.w, "@", sub.Version)
 			}
-			fmt.Fprint(os.Stdout, "\n")
+			fmt.Fprint(l.w, "\n")
 		}
 
 	default:
-		fmt.Fprintf(os.Stdout, "for args %s\n", args)
-		fmt.Fprintln(os.Stdout, "stub for list.")
-		fmt.Fprintln(os.Stdout, "Project Name: <NAME>")
-		fmt.Fprintln(os.Stdout, "\t Sub: <NAME>@<VERSION>")
-		fmt.Fprintln(os.Stdout, "\t Sub: <NAME>@<VERSION>")
+		fmt.Fprintf(l.w, "for args %s\n", args)
+		fmt.Fprintln(l.w, "stub for list.")
+		fmt.Fprintln(l.w, "Project Name: <NAME>")
+		fmt.Fprintln(l.w, "\t Sub: <NAME>@<VERSION>")
+		fmt.Fprintln(l.w, "\t Sub: <NAME>@<VERSION>")
 	}
 	return nil
 }

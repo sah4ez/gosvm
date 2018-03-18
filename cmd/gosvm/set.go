@@ -1,16 +1,18 @@
-package main
+package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
-	"errors"
 	"fmt"
+	"io"
 	"os"
 
-	"github.com/sah4ez/gosvm/internal/dependency"
-	"github.com/sah4ez/gosvm/internal/dependency/glide"
-	structure "github.com/sah4ez/gosvm/internal/structure"
+	"github.com/sah4ez/gosvm/pkg/dependency"
+	"github.com/sah4ez/gosvm/pkg/dependency/glide"
+	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
-type setCmd struct{}
+type setCmd struct {
+	w io.Writer
+}
 
 var shortHelpSet = "set version for all or cpecifict pacakge\n \tset <LIB_NAME><VERSION> [...<PACK_NAME>]"
 
@@ -25,7 +27,7 @@ func (s *setCmd) Run(args []string) error {
 
 	switch len(args) {
 	case 0, 1, 2:
-		return errors.New(fmt.Sprintf("wrong args: %s", args))
+		return fmt.Errorf("wrong args: %s", args)
 	case 3:
 		libName := args[1]
 		libVer := args[2]
@@ -42,9 +44,9 @@ func (s *setCmd) Run(args []string) error {
 			return err
 		}
 
-		fmt.Fprintf(os.Stdout, "will be set %s for all libs %s\n", libVer, libVer)
+		fmt.Fprintf(s.w, "will be set %s for all libs %s\n", libVer, libVer)
 	default:
-		fmt.Fprintf(os.Stdout, "will be set %s for all libs %s in packs: %s\n", args[2], args[1], args[3:])
+		fmt.Fprintf(s.w, "will be set %s for all libs %s in packs: %s\n", args[2], args[1], args[3:])
 	}
 	return nil
 }

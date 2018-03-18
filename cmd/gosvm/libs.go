@@ -1,4 +1,4 @@
-package main
+package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
 	"bytes"
@@ -7,13 +7,15 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/sah4ez/gosvm/internal/dependency"
-	"github.com/sah4ez/gosvm/internal/dependency/dep"
-	"github.com/sah4ez/gosvm/internal/dependency/glide"
-	"github.com/sah4ez/gosvm/internal/structure"
+	"github.com/sah4ez/gosvm/pkg/dependency"
+	"github.com/sah4ez/gosvm/pkg/dependency/dep"
+	"github.com/sah4ez/gosvm/pkg/dependency/glide"
+	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
-type libsCmd struct{}
+type libsCmd struct {
+	w io.Writer
+}
 
 var shortHelpLibs = "list using libs in SubProject and hist version"
 
@@ -78,14 +80,14 @@ func (l *libsCmd) Run(args []string) error {
 	defer func(out bytes.Buffer) {
 		fmt.Fprintln(os.Stdout, out.String())
 	}(*stdout)
-	less(stdout)
+	l.less(stdout)
 	return nil
 }
 
-func less(stdin io.Reader) {
+func (l *libsCmd) less(stdin io.Reader) {
 	less := exec.Command("less")
 	less.Stdin = stdin
-	less.Stdout = os.Stdout
+	less.Stdout = l.w
 	less.Start()
 	less.Wait()
 }
