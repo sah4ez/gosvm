@@ -24,10 +24,11 @@ type Require struct {
 func LoadGoModFile(path string) (*GoMod, error) {
 	gomod := &GoMod{}
 
-	reader, err := fs.ReadFile(path)
+	reader, err, fClose := fs.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
+	defer fClose()
 
 	required := false
 	for {

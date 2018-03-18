@@ -10,6 +10,7 @@ import (
 	"github.com/sah4ez/gosvm/pkg/dependency"
 	"github.com/sah4ez/gosvm/pkg/dependency/dep"
 	"github.com/sah4ez/gosvm/pkg/dependency/glide"
+	"github.com/sah4ez/gosvm/pkg/dependency/gomod"
 	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
@@ -49,11 +50,17 @@ func (l *libsCmd) Run(args []string) error {
 		if err != nil {
 			return err
 		}
+		goModLoader := gomod.NewGoModLoader(root, packs)
+		packs, err = goModLoader.Load()
+		if err != nil {
+			return err
+		}
 
 		fmt.Fprintln(stdout, "Title:\t\t", root.Title)
 		fmt.Fprintln(stdout, "Description:\t", root.Description)
 		fmt.Fprintln(stdout, "Version:\t", root.Version)
 		fmt.Fprintln(stdout, "====================Libs====================")
+		fmt.Fprintln(stdout, "")
 
 		packs.Range(func(libName string, packVersion map[string][]string) {
 			fmt.Fprintln(stdout, "\t", libName)

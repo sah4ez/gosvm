@@ -53,7 +53,10 @@ func (g *glideLoader) SetVersionAll(pack string, version string) error {
 			return fmt.Errorf("could not find path to glide.yaml: %s", sub.Title)
 		}
 
-		reader := fs.ReadFile(path)
+		reader, err, fClose := fs.ReadFile(path)
+		if err != nil {
+			return err
+		}
 
 		result := []string{}
 		var line string
@@ -84,7 +87,7 @@ func (g *glideLoader) SetVersionAll(pack string, version string) error {
 		}
 
 		fmt.Println("loaded: \n", strings.Join(result, ""))
-		file.Close()
+		fClose()
 	}
 	return nil
 }

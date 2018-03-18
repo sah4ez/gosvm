@@ -18,17 +18,17 @@ func (g *goModLoader) Load() (*dependency.Packages, error) {
 		if sub.Type != dependency.GoModType && !ok {
 			continue
 		}
-		_, err := LoadGoModFile(path)
+		gomod, err := LoadGoModFile(path)
 		if err != nil {
 			return g.deps, err
 		}
-		//for _, gi := range gomod.Import {
-		//	pack := dependency.Package{
-		//		Name:       sub.Title,
-		//		LibVersion: gi.Version,
-		//	}
-		//	g.deps.Add(gi.Package, pack)
-		//}
+		for _, req := range gomod.Require {
+			pack := dependency.Package{
+				Name:       sub.Title,
+				LibVersion: req.Version,
+			}
+			g.deps.Add(req.Path, pack)
+		}
 	}
 	return g.deps, nil
 }
@@ -51,4 +51,11 @@ func (g *goModLoader) CompareVersion(source string, target string) (bool, error)
 
 func (g *goModLoader) Update() error {
 	panic("not implemented")
+}
+
+func NewGoModLoader(root *structure.Root, deps *dependency.Packages) dependency.Loader {
+	return &goModLoader{
+		root: root,
+		deps: deps,
+	}
 }
