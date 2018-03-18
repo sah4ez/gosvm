@@ -17,9 +17,10 @@ type command interface {
 
 func main() {
 	commands := [...]command{
-		&listCmd{},
-		&libsCmd{},
-		&setCmd{},
+		&listCmd{w: os.Stdout},
+		&libsCmd{w: os.Stdout},
+		&setCmd{w: os.Stdout},
+		&versionCmd{w: os.Stdout},
 	}
 
 	examples := [...][2]string{

@@ -3,8 +3,8 @@ package glide
 import (
 	"testing"
 
-	"github.com/sah4ez/gosvm/internal/dependency"
-	"github.com/sah4ez/gosvm/internal/structure"
+	"github.com/sah4ez/gosvm/pkg/dependency"
+	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
 func TestLoadGlide(t *testing.T) {

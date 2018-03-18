@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/sah4ez/gosvm/fs"
-	"github.com/sah4ez/gosvm/internal/dependency"
-	"github.com/sah4ez/gosvm/internal/structure"
+	"github.com/sah4ez/gosvm/pkg/dependency"
+	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
 type glideLoader struct {
