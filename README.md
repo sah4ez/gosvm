@@ -76,9 +76,10 @@ Version = "0.2.1"
 |-----:|-------------|
 | list | formatted output svm.toml |
 | libs | analyse of packages usage in all packages and formatted output |
-| set | (plan) set version for all or specifict packages |
+| version | print current version, revision number and date build |
+| set | (plan) set version for all or specifict packages (implemented for glide) |
 | get | (plan) get specific package version or all  version package usage for specifict package |
-| update | (plan) update vendor and .lock and commit changes |
+| update | (plan) update vendor or v and .lock and commit changes |
 | revert | (plan) revert commit from gosvm |
 | ... | you can contribute your ideas here or issues... |
 
@@ -155,4 +156,5 @@ Supported:
 
 - dep
 - glide
+- vgo (go.mod)
 - ...
