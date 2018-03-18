@@ -5,6 +5,7 @@ import "sort"
 var (
 	GlideType = "glide"
 	TomlType  = "toml"
+	GoModType = "mod"
 )
 
 // Loader provide methods for each dependecies manager (dep, glide and etc.)

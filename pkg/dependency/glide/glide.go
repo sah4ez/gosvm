@@ -1,10 +1,8 @@
 package glide
 
 import (
-	"bufio"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"strings"
 
 	"github.com/sah4ez/gosvm/fs"
@@ -55,12 +53,7 @@ func (g *glideLoader) SetVersionAll(pack string, version string) error {
 			return fmt.Errorf("could not find path to glide.yaml: %s", sub.Title)
 		}
 
-		file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0)
-		if err != nil {
-			return err
-		}
-
-		reader := bufio.NewReader(file)
+		reader := fs.ReadFile(path)
 
 		result := []string{}
 		var line string

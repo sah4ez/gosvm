@@ -1,6 +1,9 @@
 package fs // import "github.com/sah4ez/gosvm/fs"
 
-import "os"
+import (
+	"bufio"
+	"os"
+)
 
 var gopath = os.Getenv("GOPATH")
 
@@ -22,4 +25,15 @@ func PathToDep(basePath, projectName string) (string, bool) {
 func PathToGoMod(basePath, projectName string) (string, bool) {
 	path := gopath + "/src/" + basePath + "/" + projectName + "/go.mod"
 	return path, Exists(path)
+}
+
+func ReadFile(path string) (*bufio.Reader, error) {
+	var reader *bufio.Reader
+	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0)
+	if err != nil {
+		return reader, err
+	}
+
+	reader = bufio.NewReader(file)
+	return reader, nil
 }
