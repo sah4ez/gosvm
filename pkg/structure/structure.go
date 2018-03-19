@@ -12,8 +12,8 @@ import (
 type Root struct {
 	Title       string
 	Description string
-	Path        string `toml:,omitempty`
-	Version     string `toml:,omitempty`
+	Path        string `toml:",omitempty"`
+	Version     string `toml:",omitempty"`
 	BasePath    string
 	SubProject  []SubProject
 }
@@ -21,9 +21,9 @@ type Root struct {
 type SubProject struct {
 	Title       string
 	Description string
-	Path        string `toml:,omitempty`
-	Version     string `toml:,omitempty`
-	Type        string `toml:,omitempty`
+	Path        string `toml:",omitempty"`
+	Version     string `toml:",omitempty"`
+	Type        string `toml:",omitempty"`
 }
 
 func LoadStructure(path string) (*Root, error) {
