@@ -32,3 +32,8 @@ Version = "0.2.1"
 Title = "scheduler"
 Description = "execute deferred events"
 Version = "0.2.1"
+
+[[SubProject]]
+Title = "api"
+Description = "API gateway"
+Version = "0.0.1"
