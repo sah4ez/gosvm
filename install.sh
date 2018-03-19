@@ -1,5 +1,5 @@
 #!/bin/sh
-go get https://github.com/sah4ez/gosvm.git
+go get github.com/sah4ez/gosvm
 
 command -v vgo || go get -u golang.org/x/vgo;
 
