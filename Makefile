@@ -13,7 +13,7 @@ all: check install
 
 .PHONY: clean
 clean:
-	rm -rf _build/ release/
+	rm -rf dist/
 
 build: test
 	@$(GO) fmt ./...
