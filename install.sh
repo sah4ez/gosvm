@@ -4,6 +4,6 @@ git clone https://github.com/sah4ez/gosvm.git $TMP
 
 command -v vgo || go get -u golang.org/x/vgo;
 
-make $TMP/Makefile 
+make -f $TMP/Makefile 
 
 rm -rf $TMP
