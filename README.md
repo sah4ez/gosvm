@@ -6,7 +6,13 @@ Golang services version manager
 
 For install on Linux run:
 ```bash
-curl -sL https://raw.githubusercontent.com/sah4ez/gosvm/master/install.sh | sh
+sudo wget https://github.com/sah4ez/gosvm/releases/download/v0.0.6/gosvm-v0.0.5-linux-amd64 -O /usr/local/bin/gosvm
+sudo chmod +x /usr/local/bin/gosvm
+```
+For install on OS X run:
+```bash
+sudo wget https://github.com/sah4ez/gosvm/releases/download/v0.0.6/gosvm-v0.0.5-darwin-amd64 -O /usr/local/bin/gosvm
+sudo chmod +x /usr/local/bin/gosvm
 ```
 
 # Background
