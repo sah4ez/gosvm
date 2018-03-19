@@ -36,10 +36,10 @@ check:
 .PHONY: build-all
 build-all:
 	mkdir -p _build
-	GOOS=darwin  GOARCH=amd64 $(GO) build $(LD_FLAGS) -o _build/$(NAME)-$(VERSION)-darwin-amd64 ./cmd/$(NAME)
-	GOOS=linux   GOARCH=amd64 $(GO) build $(LD_FLAGS) -o _build/$(NAME)-$(VERSION)-linux-amd64 ./cmd/$(NAME)
-	GOOS=linux   GOARCH=arm   $(GO) build $(LD_FLAGS) -o _build/$(NAME)-$(VERSION)-linux-arm ./cmd/$(NAME)
-	GOOS=linux   GOARCH=arm64 $(GO) build $(LD_FLAGS) -o _build/$(NAME)-$(VERSION)-linux-arm64 ./cmd/$(NAME)
+	GOOS=darwin  GOARCH=amd64 $(GO) build $(LDFLAGS) -o _build/$(NAME)-$(VERSION)-darwin-amd64 ./cmd/$(NAME)
+	GOOS=linux   GOARCH=amd64 $(GO) build $(LDFLAGS) -o _build/$(NAME)-$(VERSION)-linux-amd64 ./cmd/$(NAME)
+	GOOS=linux   GOARCH=arm   $(GO) build $(LDFLAGS) -o _build/$(NAME)-$(VERSION)-linux-arm ./cmd/$(NAME)
+	GOOS=linux   GOARCH=arm64 $(GO) build $(LDFLAGS) -o _build/$(NAME)-$(VERSION)-linux-arm64 ./cmd/$(NAME)
 	cd _build; sha256sum * > sha256sums.txt
 #GOOS=windows GOARCH=amd64 $(GO) build $(LD_FLAGS) -o _build/$(NAME)-$(VERSION)-windows-amd64 ./cmd/$(NAME)
 
