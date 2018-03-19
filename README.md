@@ -2,6 +2,13 @@
 
 Golang services version manager
 
+# Install
+
+For install on Linux run:
+```bash
+curl -sL https://raw.githubusercontent.com/sah4ez/gosvm/master/install.sh | sh
+```
+
 # Background
 
 For development many services, each can used common packages, example: logger, DB driver, data model and etc.
