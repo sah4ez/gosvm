@@ -12,6 +12,7 @@ require (
 	"github.com/xanzy/ssh-agent" v0.0.0-20151215153451-ba9c9e33906f
 	"golang.org/x/crypto" v0.0.0-20180319061731-c3a3ad6d03f7
 	"golang.org/x/net" v0.0.0-20180317175401-24dd3780ca4f
+	"golang.org/x/sys" v0.0.0-20180319153314-d8e400bc7db4
 	"golang.org/x/text" v0.0.0-20171214130843-f21a4dfb5e38
 	"gopkg.in/src-d/go-billy.v4" v1.1.0-gopkgin-v4.1.0
 	"gopkg.in/src-d/go-git.v4" v1.2.0-gopkgin-v4.2.0
