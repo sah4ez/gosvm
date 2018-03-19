@@ -21,6 +21,7 @@ func main() {
 		&libsCmd{w: os.Stdout},
 		&setCmd{w: os.Stdout},
 		&versionCmd{w: os.Stdout},
+		&cloneCmd{w: os.Stdout},
 	}
 
 	examples := [...][2]string{
@@ -29,8 +30,16 @@ func main() {
 			"show list all services for current project",
 		},
 		{
+			"gosvm libs",
+			"run checking all libs in list repositores and find different version",
+		},
+		{
 			"gosvm set bbb.com/path/to/lib 1.2.3 pack.name",
 			"set version of lib in specifict packages",
+		},
+		{
+			"gosvm clone",
+			"clone not exists repositories to basePath in svm.toml",
 		},
 	}
 

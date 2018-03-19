@@ -5,11 +5,14 @@ VERSION=0.0.1
 LDFLAGS=-ldflags "-X main.Version=$(VERSION) -X main.Hash=$(GIT_REV) -X main.BuildDate=$(BUILD_DATE)"
 SRC = $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 
+GO=CC=gcc vgo
+CC=gcc
+
 all: check install
 
 build: test
-	vgo fmt ./...
-	vgo build $(LDFLAGS) ./cmd/gosvm 
+	@$(GO) fmt ./...
+	$(GO) build $(LDFLAGS) ./cmd/gosvm 
 	@mv gosvm ./bin/gosvm
 
 install: build
@@ -19,8 +22,8 @@ install: build
 check:
 	@test -z $(shell gofmt -l main.go | tee /dev/stderr) || echo "[WARN] Fix formatting issues with 'make fmt'"
 	@for d in $$(go list ./... | grep -v vendor/); do golint $${d}; done
-	@go tool vet ${SRC}
+	@$(GO) tool vet ${SRC}
 
 .PHONY: test
 test:
-	vgo test ./...
+	$(GO) test ./...

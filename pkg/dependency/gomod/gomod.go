@@ -1,6 +1,8 @@
 package gomod
 
 import (
+	"strings"
+
 	"github.com/sah4ez/gosvm/fs"
 	"github.com/sah4ez/gosvm/pkg/dependency"
 	"github.com/sah4ez/gosvm/pkg/structure"
@@ -23,9 +25,18 @@ func (g *goModLoader) Load() (*dependency.Packages, error) {
 			return g.deps, err
 		}
 		for _, req := range gomod.Require {
-			pack := dependency.Package{
-				Name:       sub.Title,
-				LibVersion: req.Version,
+			var pack dependency.Package
+			if strings.Contains(req.Version, "v0.0.0") {
+				pseudo := strings.Split(req.Version, "-")
+				pack = dependency.Package{
+					Name:       sub.Title,
+					LibVersion: pseudo[len(pseudo)-1],
+				}
+			} else {
+				pack = dependency.Package{
+					Name:       sub.Title,
+					LibVersion: req.Version,
+				}
 			}
 			g.deps.Add(req.Path, pack)
 		}
