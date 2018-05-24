@@ -1,12 +1,12 @@
 package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
-	"fmt"
 	"io"
 	"os"
 	"strings"
 
 	"github.com/sah4ez/gosvm/fs"
+	fmt "github.com/sah4ez/gosvm/pkg/formatting"
 	"github.com/sah4ez/gosvm/pkg/structure"
 	git "gopkg.in/src-d/go-git.v4"
 )
@@ -33,9 +33,9 @@ func (l *cloneCmd) Run(args []string) error {
 		if err != nil {
 			return err
 		}
-		fmt.Fprintln(l.w, "Check and clone not exists:")
-		fmt.Fprintln(l.w, "")
-		fmt.Fprintln(l.w, "Base path: ", root.BasePath)
+		fmt.Info.Fprintln(l.w, "Check and clone not exists:")
+		fmt.Info.Fprintln(l.w, "")
+		fmt.Info.Fprintln(l.w, "Base path: ", root.BasePath)
 		for _, sub := range root.SubProject {
 			fullPath := fs.PathToProject(root.BasePath, sub.Title)
 			if !fs.ExistsGoProject(root.BasePath, sub.Title) {
@@ -67,13 +67,13 @@ func (l *cloneCmd) Run(args []string) error {
 				if err != nil {
 					return err
 				}
-				fmt.Fprintf(l.w, "%s...\t%s\n", fullPath, "Cloned")
+				fmt.Info.Fprintf(l.w, "%s...\t%s\n", fullPath, "Cloned")
 				continue
 			}
-			fmt.Fprintf(l.w, "%s...\t%s\n", fullPath, "Exists")
+			fmt.Info.Fprintf(l.w, "%s...\t%s\n", fullPath, "Exists")
 		}
 	default:
-		fmt.Fprintln(l.w, "from args", args)
+		fmt.Warn.Fprintln(l.w, "from args", args)
 	}
 	return nil
 }

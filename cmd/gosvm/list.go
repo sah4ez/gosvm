@@ -1,10 +1,10 @@
 package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
-	"fmt"
 	"io"
 	"os"
 
+	fmt "github.com/sah4ez/gosvm/pkg/formatting"
 	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
@@ -30,28 +30,28 @@ func (l *listCmd) Run(args []string) error {
 			return err
 		}
 
-		fmt.Fprintln(l.w, "Title:\t\t", root.Title)
-		fmt.Fprintln(l.w, "Description:\t", root.Description)
-		fmt.Fprintln(l.w, "Version:\t", root.Version)
+		fmt.Info.Fprintln(l.w, "Title:\t\t", root.Title)
+		fmt.Info.Fprintln(l.w, "Description:\t", root.Description)
+		fmt.Info.Fprintln(l.w, "Version:\t", root.Version)
 		for i, sub := range root.SubProject {
 			if i == 0 {
-				fmt.Fprintln(l.w, "\t")
-				fmt.Fprintln(l.w, "\tSubPackages:")
-				fmt.Fprintln(l.w, "\t")
+				fmt.Info.Fprintln(l.w, "\t")
+				fmt.Info.Fprintln(l.w, "\tSubPackages:")
+				fmt.Info.Fprintln(l.w, "\t")
 			}
-			fmt.Fprint(l.w, "\t", sub.Title)
+			fmt.Info.Fprint(l.w, "\t", sub.Title)
 			if sub.Version != "" {
-				fmt.Fprint(l.w, "@", sub.Version)
+				fmt.Info.Fprint(l.w, "@", sub.Version)
 			}
-			fmt.Fprint(l.w, "\n")
+			fmt.Info.Fprint(l.w, "\n")
 		}
 
 	default:
-		fmt.Fprintf(l.w, "for args %s\n", args)
-		fmt.Fprintln(l.w, "stub for list.")
-		fmt.Fprintln(l.w, "Project Name: <NAME>")
-		fmt.Fprintln(l.w, "\t Sub: <NAME>@<VERSION>")
-		fmt.Fprintln(l.w, "\t Sub: <NAME>@<VERSION>")
+		fmt.Info.Fprintf(l.w, "for args %s\n", args)
+		fmt.Info.Fprintln(l.w, "stub for list.")
+		fmt.Info.Fprintln(l.w, "Project Name: <NAME>")
+		fmt.Info.Fprintln(l.w, "\t Sub: <NAME>@<VERSION>")
+		fmt.Info.Fprintln(l.w, "\t Sub: <NAME>@<VERSION>")
 	}
 	return nil
 }

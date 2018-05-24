@@ -17,8 +17,7 @@ clean:
 
 build: test
 	@$(GO) fmt ./...
-	$(GO) build $(LDFLAGS) ./cmd/$(NAME) 
-	@mv gosvm ./bin/gosvm
+	$(GO) build $(LDFLAGS) -o ./bin/$(NAME) ./cmd/$(NAME) 
 
 .PHONY: test
 test:
