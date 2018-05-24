@@ -2,6 +2,7 @@ package main // import "github.com/sah4ez/gosvm/cmd/gosvm"
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"os"
 	"os/exec"
@@ -10,7 +11,6 @@ import (
 	"github.com/sah4ez/gosvm/pkg/dependency/dep"
 	"github.com/sah4ez/gosvm/pkg/dependency/glide"
 	"github.com/sah4ez/gosvm/pkg/dependency/gomod"
-	fmt "github.com/sah4ez/gosvm/pkg/formatting"
 	"github.com/sah4ez/gosvm/pkg/structure"
 )
 
@@ -56,36 +56,36 @@ func (l *libsCmd) Run(args []string) error {
 			return err
 		}
 
-		fmt.Info.Fprintln(stdout, "Title:\t\t", root.Title)
-		fmt.Info.Fprintln(stdout, "Description:\t", root.Description)
-		fmt.Info.Fprintln(stdout, "Version:\t", root.Version)
-		fmt.Info.Fprintln(stdout, "====================Libs====================")
-		fmt.Info.Fprintln(stdout, "")
+		fmt.Fprintln(stdout, "Title:\t\t", root.Title)
+		fmt.Fprintln(stdout, "Description:\t", root.Description)
+		fmt.Fprintln(stdout, "Version:\t", root.Version)
+		fmt.Fprintln(stdout, "====================Libs====================")
+		fmt.Fprintln(stdout, "")
 
 		packs.Range(func(libName string, packVersion map[string][]string) {
-			fmt.Info.Fprintln(stdout, "\t", libName)
+			fmt.Fprintln(stdout, "\t", libName)
 			if len(packVersion) > 1 {
-				fmt.Info.Fprintf(stdout, "\t !!!%d differnt vesrion are used!!!\n", len(packVersion))
+				fmt.Fprintf(stdout, "\t !!!%d differnt vesrion are used!!!\n", len(packVersion))
 			}
 			for ver, pack := range packVersion {
 				if ver == "" {
-					fmt.Info.Fprintf(stdout, "\t\tlatest :")
+					fmt.Fprintf(stdout, "\t\tlatest :")
 				} else {
-					fmt.Info.Fprintf(stdout, "\t\t%.12s :", ver)
+					fmt.Fprintf(stdout, "\t\t%.12s :", ver)
 				}
 
-				fmt.Info.Fprintln(stdout)
+				fmt.Fprintln(stdout)
 				for _, name := range pack {
-					fmt.Info.Fprintf(stdout, "\t\t\t%s\n", name)
+					fmt.Fprintf(stdout, "\t\t\t%s\n", name)
 				}
 			}
-			fmt.Info.Fprintln(stdout)
+			fmt.Fprintln(stdout)
 		})
 	default:
-		fmt.Info.Fprintln(os.Stderr, "wrong args", args)
+		fmt.Fprintln(os.Stderr, "wrong args", args)
 	}
 	defer func(out bytes.Buffer) {
-		fmt.Info.Fprintln(os.Stdout, out.String())
+		fmt.Fprintln(os.Stdout, out.String())
 	}(*stdout)
 	l.less(stdout)
 	return nil
