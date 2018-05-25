@@ -2,3 +2,4 @@
 *.swp
 /bin/*
 testdata/svm_doc.toml
+_build
