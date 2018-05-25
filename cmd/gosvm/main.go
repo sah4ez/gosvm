@@ -35,6 +35,7 @@ func main() {
 		&versionCmd{w: os.Stdout},
 		&cloneCmd{w: os.Stdout},
 		&docCmd{w: os.Stdout},
+		&generateCmd{w: os.Stdout},
 	}
 
 	examples := [...][2]string{
@@ -57,6 +58,10 @@ func main() {
 		{
 			"gosvm doc",
 			"get from each repos svm.toml and add it to root svm.toml project",
+		},
+		{
+			"gosvm generate",
+			"generate toml template for specification of project",
 		},
 	}
 
@@ -112,7 +117,7 @@ func parseArgs(args []string) (cmdName string, printHelpCmd bool, exit bool, rar
 			args = append(args[:i], args[i+1:]...)
 		}
 	}
-	rargs = make([]string, len(args), len(args))
+	rargs = make([]string, len(args))
 	copy(rargs, args)
 
 	switch len(rargs) {

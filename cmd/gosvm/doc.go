@@ -30,7 +30,7 @@ func (l *docCmd) Run(args []string) error {
 
 	switch len(args) {
 	case 1:
-		os.Remove(wd + "/svm_doc.toml")
+		err = os.Remove(wd + "/svm_doc.toml")
 		if err != nil {
 			return err
 		}
@@ -66,11 +66,22 @@ func (l *docCmd) Run(args []string) error {
 			if err != nil {
 				return err
 			}
-			writeSubProject(docs, data)
+			err = writeSubProject(docs, data)
+			if err != nil {
+				return err
+			}
 			stdfmt.Fprintln(l.w, specFile)
 			stdfmt.Fprintln(l.w, string(data))
 			stdfmt.Fprintln(l.w, "")
 		}
+	default:
+		stdfmt.Fprintln(l.w, `
+help:
+  Command for generation documentation for all subproject 
+  in the one document svm_doc.toml.
+  
+  If svm.toml not found in project folder, infomation will be 
+  add from root svm.toml.`)
 	}
 	return nil
 }
@@ -85,8 +96,5 @@ func writeSubProject(file *os.File, data []byte) error {
 		return err
 	}
 	_, err = file.WriteString("\n")
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
