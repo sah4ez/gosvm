@@ -16,7 +16,10 @@ type generateCmd struct {
 	w io.Writer
 }
 
-var shortHelpGenerate = "Generate template for spec of project"
+var shortHelpGenerate = `[OPTION] generate toml template for specification of project
+		OPTION:
+			custom - generate spec in interactive mode
+`
 
 func (l *generateCmd) Name() string      { return "generate" }
 func (l *generateCmd) ShortHelp() string { return shortHelpGenerate }

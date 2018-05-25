@@ -44,7 +44,7 @@ We have the project structure:
 - processor - simple service which process input events and persist to MongoDB
 - schdeudler - to execute deferred events
 
-And we can simple describe all structure in `svm.tolm` and version manage or update it for all services. Examlpe:
+And we can simple describe all structure in `svm.toml` and version manage or update it for all services. Examlpe:
 
 ```toml
 Title = "exmaple-project"
@@ -91,6 +91,8 @@ Version = "0.2.1"
 | libs | analyse of packages usage in all packages and formatted output |
 | version | print current version, revision number and date build |
 | pull | pull repositories if not exists in basePath |
+| doc | generate spec for all project from svm.toml file of each repository |
+| generate | generate template spec for SubProject in automationMode or custom |
 | set | (plan) set version for all or specifict packages (implemented for glide) |
 | get | (plan) get specific package version or all  version package usage for specifict package |
 | update | (plan) update vendor or v and .lock and commit changes |

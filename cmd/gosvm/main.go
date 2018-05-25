@@ -60,7 +60,7 @@ func main() {
 			"get from each repos svm.toml and add it to root svm.toml project",
 		},
 		{
-			"gosvm generate",
+			"gosvm generate [custom]",
 			"generate toml template for specification of project",
 		},
 	}
