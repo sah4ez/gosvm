@@ -1,0 +1,35 @@
+[SubPackage]
+Title = "Events"
+Description = "commong package events"
+Version = 2.0.1
+
+[SubPackage]
+Description = "wrapper for logger implement own format/logic"
+Title = "logger-wrap"
+Version = "0.2.1"
+
+[SubPackage]
+Description = "wrapper for MongoDB driver"
+Title = "mongo"
+Version = "0.2.1"
+
+[SubPackage]
+Description = "structure of models for persist document to MongoDB"
+Title = "models"
+Version = "0.2.1"
+
+[SubPackage]
+Description = "simple service which process input events and store to MongoDB"
+Title = "processor"
+Version = "0.2.1"
+
+[SubPackage]
+Description = "execute deferred events"
+Title = "scheduler"
+Version = "0.2.1"
+
+[SubPackage]
+Description = "API gateway"
+Title = "api"
+Version = "0.0.1"
+
