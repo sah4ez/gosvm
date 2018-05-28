@@ -30,50 +30,7 @@ func (l *docCmd) Run(args []string) error {
 
 	switch len(args) {
 	case 1:
-		err = os.Remove(wd + "/svm_doc.toml")
-		if err != nil {
-			return err
-		}
-		docs, err := os.OpenFile(wd+"/svm_doc.toml", os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
-		if err != nil {
-			return err
-		}
-		defer docs.Close()
-		root, err := structure.LoadStructure(wd + "/svm.toml")
-		if err != nil {
-			return err
-		}
-
-		for _, sub := range root.SubProject {
-			fullPath := fs.PathToProject(root.BasePath, sub.Title)
-			if !fs.ExistsGoProject(root.BasePath, sub.Title) {
-				return ErrProjectNotFound
-			}
-			specFile := fullPath + "/svm.toml"
-			if !fs.Exists(specFile) {
-				fmt.Warn.Fprintln(l.w, "[WARN] file not exist: "+specFile)
-				b, err := toml.Marshal(sub)
-				if err != nil {
-					return nil
-				}
-				err = writeSubProject(docs, b)
-				if err != nil {
-					return err
-				}
-				continue
-			}
-			data, err := ioutil.ReadFile(specFile)
-			if err != nil {
-				return err
-			}
-			err = writeSubProject(docs, data)
-			if err != nil {
-				return err
-			}
-			stdfmt.Fprintln(l.w, specFile)
-			stdfmt.Fprintln(l.w, string(data))
-			stdfmt.Fprintln(l.w, "")
-		}
+		err = l.toTOML(wd)
 	default:
 		stdfmt.Fprintln(l.w, `
 help:
@@ -81,7 +38,63 @@ help:
   in the one document svm_doc.toml.
   
   If svm.toml not found in project folder, infomation will be 
-  add from root svm.toml.`)
+  add from root svm.toml.
+	
+	Usage:
+
+	gosvm doc 
+	`)
+	}
+	return err
+}
+
+func (l *docCmd) toTOML(wd string) error {
+	docSpec := wd + "/svm_doc.toml"
+	if fs.Exists(docSpec) {
+		err := os.Remove(docSpec)
+		if err != nil {
+			return err
+		}
+	}
+	docs, err := os.OpenFile(docSpec, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer docs.Close()
+	root, err := structure.LoadStructure(wd + "/svm.toml")
+	if err != nil {
+		return err
+	}
+
+	for _, sub := range root.SubProject {
+		fullPath := fs.PathToProject(root.BasePath, sub.Title)
+		if !fs.ExistsGoProject(root.BasePath, sub.Title) {
+			return ErrProjectNotFound
+		}
+		specFile := fullPath + "/svm.toml"
+		if !fs.Exists(specFile) {
+			fmt.Warn.Fprintln(l.w, "[WARN] file not exist: "+specFile)
+			b, err := toml.Marshal(sub)
+			if err != nil {
+				return nil
+			}
+			err = writeSubProject(docs, b)
+			if err != nil {
+				return err
+			}
+			continue
+		}
+		data, err := ioutil.ReadFile(specFile)
+		if err != nil {
+			return err
+		}
+		err = writeSubProject(docs, data)
+		if err != nil {
+			return err
+		}
+		stdfmt.Fprintln(l.w, specFile)
+		stdfmt.Fprintln(l.w, string(data))
+		stdfmt.Fprintln(l.w, "")
 	}
 	return nil
 }
