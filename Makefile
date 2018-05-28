@@ -26,7 +26,7 @@ test:
 install: build
 	@cp ./bin/$(NAME) $(GOPATH)/bin/$(NAME)
 
-teg: VERSION
+tag: VERSION
 	git tag $(VERSION)
 	git push origin $(VERSION)
 
