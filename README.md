@@ -90,7 +90,8 @@ Version = "0.2.1"
 | list | formatted output svm.toml |
 | libs | analyse of packages usage in all packages and formatted output |
 | version | print current version, revision number and date build |
-| pull | pull repositories if not exists in basePath |
+| clone | clone repositories if not exists in basePath |
+| pull | pull last changes from remote repos |
 | doc | generate spec for all project from svm.toml file of each repository |
 | generate | generate template spec for SubProject in automationMode or custom |
 | set | (plan) set version for all or specifict packages (implemented for glide) |
