@@ -34,6 +34,7 @@ func main() {
 		&setCmd{w: os.Stdout},
 		&versionCmd{w: os.Stdout},
 		&cloneCmd{w: os.Stdout},
+		&pullCmd{w: os.Stdout},
 		&docCmd{w: os.Stdout},
 		&generateCmd{w: os.Stdout},
 	}
@@ -54,6 +55,10 @@ func main() {
 		{
 			"gosvm clone",
 			"clone not exists repositories to basePath in svm.toml",
+		},
+		{
+			"gosvm pull",
+			"pull latest changes for repositories from svm.toml",
 		},
 		{
 			"gosvm doc",
