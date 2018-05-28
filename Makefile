@@ -26,6 +26,10 @@ test:
 install: build
 	@cp ./bin/$(NAME) $(GOPATH)/bin/$(NAME)
 
+teg: VERSION
+	git tag $(VERSION)
+	git push origin $(VERSION)
+
 .PHONY: check
 check:
 	@test -z $(shell gofmt -l main.go | tee /dev/stderr) || echo "[WARN] Fix formatting issues with 'make fmt'"
