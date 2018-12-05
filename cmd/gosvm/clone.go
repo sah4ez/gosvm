@@ -31,7 +31,7 @@ func (l *cloneCmd) Run(args []string) error {
 	case 1:
 		root, err := structure.LoadStructure(wd + "/svm.toml")
 		if err != nil {
-			return fmt.Errorf("In %s error %s", sub.Title, err)
+			return err
 		}
 		fmt.Fprintln(l.w, "Check and clone not exists:")
 		fmt.Fprintln(l.w, "")

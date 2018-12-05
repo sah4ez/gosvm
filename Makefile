@@ -6,7 +6,7 @@ VERSION=$(shell cat VERSION)
 LDFLAGS=-ldflags "-X main.Version=$(VERSION) -X main.Hash=$(GIT_REV) -X main.BuildDate=$(BUILD_DATE)"
 SRC = $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 
-GO=CC=gcc vgo
+GO=go
 CC=gcc
 
 all: check install
