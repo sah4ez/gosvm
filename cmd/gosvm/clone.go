@@ -31,7 +31,7 @@ func (l *cloneCmd) Run(args []string) error {
 	case 1:
 		root, err := structure.LoadStructure(wd + "/svm.toml")
 		if err != nil {
-			return err
+			return fmt.Errorf("In %s error %s", sub.Title, err)
 		}
 		fmt.Fprintln(l.w, "Check and clone not exists:")
 		fmt.Fprintln(l.w, "")
@@ -51,7 +51,7 @@ func (l *cloneCmd) Run(args []string) error {
 				if err != nil {
 					err = os.RemoveAll(fullPath)
 					if err != nil {
-						return err
+						return fmt.Errorf("In %s error %s", sub.Title, err)
 					}
 					sshURL := strings.Replace(httpsURL, "https://", "git@", 1)
 					sshURL = strings.Replace(sshURL, "/", ":", 1)
@@ -65,7 +65,7 @@ func (l *cloneCmd) Run(args []string) error {
 					)
 				}
 				if err != nil {
-					return err
+					return fmt.Errorf("In %s error %s", sub.Title, err)
 				}
 				fmt.Fprintf(l.w, "%s...\t%s\n", fullPath, "Cloned")
 				continue
