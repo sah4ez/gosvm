@@ -13,7 +13,7 @@ all: check install
 
 .PHONY: clean
 clean:
-	rm -rf dist/
+	rm -rf _build/*
 
 build: test
 	@$(GO) fmt ./...
@@ -37,7 +37,7 @@ check:
 	@$(GO) tool vet ${SRC}
 
 .PHONY: build-all
-build-all:
+build-all: clean
 	mkdir -p _build
 	GOOS=darwin  GOARCH=amd64 $(GO) build $(LDFLAGS) -o _build/$(NAME)-$(VERSION)-darwin-amd64 ./cmd/$(NAME)
 	GOOS=linux   GOARCH=amd64 $(GO) build $(LDFLAGS) -o _build/$(NAME)-$(VERSION)-linux-amd64 ./cmd/$(NAME)
