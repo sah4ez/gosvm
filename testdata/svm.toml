@@ -37,3 +37,8 @@ Version = "0.2.1"
 Title = "api"
 Description = "API gateway"
 Version = "0.0.1"
+
+[[Library]]
+Title = "library"
+Description = "Some library"
+Version = "0.2.1"
