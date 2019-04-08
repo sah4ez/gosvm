@@ -31,6 +31,25 @@ func (d *depLoader) Load() (*dependency.Packages, error) {
 			d.deps.Add(dc.Name, pack)
 		}
 	}
+	libs := d.root.Library
+	for _, sub := range libs {
+		path, ok := fs.PathToDep(d.root.BasePath, sub.Title)
+		if sub.Type != dependency.TomlType && !ok {
+			//fmt.Fprintln(os.Stderr, "missing type Package and could not load file", path)
+			continue
+		}
+		dep, err := LoadDepFile(path)
+		if err != nil {
+			return d.deps, err
+		}
+		for _, dc := range dep.Constraints {
+			pack := dependency.Package{
+				Name:       sub.Title,
+				LibVersion: dc.Version,
+			}
+			d.deps.Add(dc.Name, pack)
+		}
+	}
 	return d.deps, nil
 }
 

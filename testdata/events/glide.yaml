@@ -1,3 +1,5 @@
 import:
 - package: github.com/sah4ez/logger-wrap
   version: ^1.0.0
+- package: github.com/sah4ez/library
+  version: ^1.2.0

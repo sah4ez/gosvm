@@ -16,6 +16,15 @@ type Root struct {
 	Version     string `toml:",omitempty"`
 	BasePath    string
 	SubProject  []SubProject
+	Library     []Library
+}
+
+type Library struct {
+	Title       string
+	Description string
+	Path        string `toml:",omitempty"`
+	Version     string `toml:",omitempty"`
+	Type        string `toml:",omitempty"`
 }
 
 type SubProject struct {
@@ -52,6 +61,15 @@ func (r *Root) ParseType() {
 			fmt.Println(path)
 			if _, err := os.Stat(path); err == nil {
 				r.SubProject[i].Type = file
+			}
+		}
+	}
+	for i := range r.Library {
+		for _, file := range files {
+			path := strings.Join([]string{os.Getenv("GOPATH"), "src", r.BasePath, r.SubProject[i].Title, file}, "/")
+			fmt.Println(path)
+			if _, err := os.Stat(path); err == nil {
+				r.Library[i].Type = file
 			}
 		}
 	}

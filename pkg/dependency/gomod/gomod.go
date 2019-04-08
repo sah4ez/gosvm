@@ -41,6 +41,33 @@ func (g *goModLoader) Load() (*dependency.Packages, error) {
 			g.deps.Add(req.Path, pack)
 		}
 	}
+	libs := g.root.Library
+	for _, sub := range libs {
+		path, ok := fs.PathToGoMod(g.root.BasePath, sub.Title)
+		if sub.Type != dependency.GoModType && !ok {
+			continue
+		}
+		gomod, err := LoadGoModFile(path)
+		if err != nil {
+			return g.deps, err
+		}
+		for _, req := range gomod.Require {
+			var pack dependency.Package
+			if strings.Contains(req.Version, "v0.0.0") {
+				pseudo := strings.Split(req.Version, "-")
+				pack = dependency.Package{
+					Name:       sub.Title,
+					LibVersion: pseudo[len(pseudo)-1],
+				}
+			} else {
+				pack = dependency.Package{
+					Name:       sub.Title,
+					LibVersion: req.Version,
+				}
+			}
+			g.deps.Add(req.Path, pack)
+		}
+	}
 	return g.deps, nil
 }
 
