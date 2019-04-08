@@ -81,6 +81,11 @@ Version = "0.2.1"
 Title = "schdeudler"
 Description = "execute deferred events"
 Version = "0.2.1"
+
+[[Library]]
+Title = "library"
+Description = "some utilites library"
+Version = "0.2.1"
 ```
 
 # Commands
@@ -177,5 +182,4 @@ Supported:
 
 - dep
 - glide
-- vgo (go.mod)
-- ...
+- go.mod

@@ -46,6 +46,19 @@ func (l *listCmd) Run(args []string) error {
 			fmt.Fprint(l.w, "\n")
 		}
 
+		for i, sub := range root.Library {
+			if i == 0 {
+				fmt.Fprintln(l.w, "\t")
+				fmt.Fprintln(l.w, "\tLibrary:")
+				fmt.Fprintln(l.w, "\t")
+			}
+			fmt.Fprint(l.w, "\t", sub.Title)
+			if sub.Version != "" {
+				fmt.Fprint(l.w, "@", sub.Version)
+			}
+			fmt.Fprint(l.w, "\n")
+		}
+
 	default:
 		fmt.Fprintf(l.w, "for args %s\n", args)
 		fmt.Fprintln(l.w, "stub for list.")

@@ -35,6 +35,26 @@ func (g *glideLoader) Load() (*dependency.Packages, error) {
 			g.deps.Add(gi.Package, pack)
 		}
 	}
+
+	libs := g.root.Library
+	for _, sub := range libs {
+		path, ok := fs.PathToGlide(g.root.BasePath, sub.Title)
+		if sub.Type != dependency.GlideType && !ok {
+			//			fmt.Fprintln(os.Stderr, "missing type Package and could not load file", path)
+			continue
+		}
+		glide, err := LoadGlideFile(path)
+		if err != nil {
+			return g.deps, err
+		}
+		for _, gi := range glide.Import {
+			pack := dependency.Package{
+				Name:       sub.Title,
+				LibVersion: gi.Version,
+			}
+			g.deps.Add(gi.Package, pack)
+		}
+	}
 	return g.deps, nil
 }
 
